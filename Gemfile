@@ -5,9 +5,11 @@ gem 'sqlite3'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'turbolinks'
+gem 'twilio-ruby'
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'pry'
 end
 
 group :development do
