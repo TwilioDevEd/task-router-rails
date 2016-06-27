@@ -27,6 +27,7 @@ class WorkspaceConfig
     queues = create_task_queues
     workflow_sid = create_workflow(queues).sid
     WorkspaceInfo.instance.workflow_sid = workflow_sid
+    WorkspaceInfo.instance.post_work_activity_sid = activity_by_name('Idle').sid
   end
 
   private
