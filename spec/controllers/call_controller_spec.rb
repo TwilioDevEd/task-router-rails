@@ -64,19 +64,7 @@ RSpec.describe CallController, type: :controller do
       task_attributes  =
         "{\"from\": \"#{from_number}\", \"selected_product\": \"#{selected_product}\", \"call_sid\": \"#{call_sid}\"}"
 
-      it 'saves missed calls in the database' do
-        expect(MissedCall.count).to eq(0)
-
-        post :events,
-             EventType: 'task.canceled',
-             TaskAttributes: task_attributes
-
-        expect(MissedCall.count).to eq(1)
-        expect(MissedCall.first.phone_number).to eq(from_number)
-        expect(MissedCall.first.selected_product).to eq(selected_product)
-      end
-
-      it 'routes call to voice mail' do
+      before do
         email         = ENV['MISSED_CALLS_EMAIL_ADDRESS']
         message       = 'Sorry, All agents are busy. Please leave a message. We\'ll call you as soon as possible'
         url_message   = { Message: message }.to_query
@@ -91,7 +79,21 @@ RSpec.describe CallController, type: :controller do
         expect(calls_double).to receive(:get).with(call_sid).and_return(call_double)
         expect(call_double).to receive(:redirect_to)
           .with(redirect_url)
+      end
 
+      it 'saves missed calls in the database' do
+        expect(MissedCall.count).to eq(0)
+
+        post :events,
+             EventType: 'task.canceled',
+             TaskAttributes: task_attributes
+
+        expect(MissedCall.count).to eq(1)
+        expect(MissedCall.first.phone_number).to eq(from_number)
+        expect(MissedCall.first.selected_product).to eq(selected_product)
+      end
+
+      it 'routes call to voice mail' do
         post :events,
              EventType: 'workflow.timeout',
              TaskAttributes: task_attributes
