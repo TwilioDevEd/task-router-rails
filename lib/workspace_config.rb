@@ -21,22 +21,18 @@ class WorkspaceConfig
   end
 
   def setup
-    store_workspace_sid(create_workspace)
+    @workspace_sid = create_workspace
     @client = taskrouter_client
     set_default_activity
     create_workers
     queues = create_task_queues
-    create_workflow(queues)
+    workflow_sid = create_workflow(queues).sid
+    WorkspaceInfo.instance.workflow_sid = workflow_sid
   end
 
   private
 
   attr_reader :client, :account_sid, :auth_token
-
-  def store_workspace_sid(sid)
-    @workspace_sid = sid
-    WorkspaceInfo.instance.workspace_sid = sid
-  end
 
   def taskrouter_client
     Twilio::REST::TaskRouterClient.new(
