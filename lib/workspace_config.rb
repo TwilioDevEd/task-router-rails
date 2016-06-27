@@ -23,7 +23,6 @@ class WorkspaceConfig
   def setup
     @workspace_sid = create_workspace
     @client = taskrouter_client
-    set_default_activity
     create_workers
     queues = create_task_queues
     workflow_sid = create_workflow(queues).sid
@@ -54,21 +53,20 @@ class WorkspaceConfig
     workspace.sid
   end
 
-  def set_default_activity
-    idle_activity_sid = activity_by_name('Idle').sid
-    client.workspace.update(timeout_activity_sid: idle_activity_sid)
-  end
-
   def create_workers
-    bob_attributes = '{"products": ["ProgrammableSMS"], "contact_uri": "+593992670240"}'
-    alice_attributes = '{"products": ["ProgrammableVoice"], "contact_uri": "+593987908027"}'
+    bob_attributes = "{\"products\": [\"ProgrammableSMS\"], \"contact_uri\": \"#{BOB_NUMBER}\"}"
+    alice_attributes = "{\"products\": [\"ProgrammableVoice\"], \"contact_uri\": \"#{ALICE_NUMBER}\"}"
 
     create_worker('Bob', bob_attributes)
     create_worker('Alice', alice_attributes)
   end
 
   def create_worker(name, attributes)
-    client.workspace.workers.create(friendly_name: name, attributes: attributes)
+    client.workspace.workers.create(
+      friendly_name: name,
+      attributes: attributes,
+      activity_sid: activity_by_name('Idle').sid
+    )
   end
 
   def activity_by_name(name)
@@ -88,7 +86,7 @@ class WorkspaceConfig
                                   "products HAS 'ProgrammableSMS'")
 
     all_queue = create_task_queue('All', reservation_activity_sid,
-                                  assignment_activity_sid, '1 == 1')
+                                  assignment_activity_sid, '1==1')
 
     { voice: voice_queue, sms: sms_queue, all: all_queue }
   end
@@ -103,7 +101,7 @@ class WorkspaceConfig
   end
 
   def create_workflow(queues)
-    default_rule_target = create_rule_target(queues[:all].sid, 1, QUEUE_TIMEOUT, '1 == 1')
+    default_rule_target = create_rule_target(queues[:all].sid, 1, QUEUE_TIMEOUT, '1==1')
     voice_rule_target   = create_rule_target(queues[:voice].sid, 5, QUEUE_TIMEOUT, nil)
     sms_rule_target     = create_rule_target(queues[:sms].sid, 5, QUEUE_TIMEOUT, nil)
     voice_rule = create_rule('selected_product=="ProgrammableVoice"',
@@ -118,7 +116,7 @@ class WorkspaceConfig
       friendly_name: WORKFLOW_NAME,
       assignment_callback_url: ASSIGNMENT_CALLBACK_URL,
       fallback_assignment_callback_url: ASSIGNMENT_CALLBACK_URL,
-      task_reservation_timeout: WORKFLOW_TIMEOUT,
+      task_reservation_timeout: WORKFLOW_TIMEOUT
     )
   end
 
