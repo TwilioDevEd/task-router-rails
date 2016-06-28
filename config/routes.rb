@@ -3,6 +3,6 @@ Rails.application.routes.draw do
 
   post 'call/enqueue'  => 'call#enqueue'
   get  'call/incoming' => 'call#incoming'
-  post 'assignment'    => 'call#assignment'
-  post 'events'        => 'call#events'
+  post 'assignment'    => 'callback#assignment'
+  post 'events'        => 'callback#events'
 end
