@@ -1,24 +1,28 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Missed Calls</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Selected product</th>
-      <th>Phone number</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @missed_calls.each do |missed_call| %>
-      <tr>
-        <td><%= missed_call.selected_product %></td>
-        <td><%= missed_call.phone_number %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
+<div class="container full-height-container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+        <strong>Missed calls</strong> <span class="text-muted">(Product/Number)</span></div>
+        <!-- Table -->
+        <table class="table">
+            <tbody>
+                <% @missed_calls.each do |call| %>
+                    <tr>
+                        <td class="col-md-4">
+                            <% if call.selected_product == 'ProgrammableVoice' %>
+                                <span>Programmable Voice</span>
+                            <% else %>
+                                <span>Programmable SMS</span>
+                            <% end %>
+                        </td>
+                        <td class="col-md-8">
+                            <a href="tel:<%= call.phone_number %>">
+                                <i class="fa fa-phone"></i>
+                                <%= call.phone_number %>
+                            </a>
+                        </td>
+                    </tr>
+                <%end %>
+            </tbody>
+        </table>
+    </div>
+</div>
