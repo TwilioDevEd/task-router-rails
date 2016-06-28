@@ -21,7 +21,7 @@ class CallbackController < ApplicationController
         phone_number: task_attributes['from']
       )
 
-      redirect_to_voicemail(task_attributes['call_sid'])
+      redirect_to_voicemail(task_attributes['call_sid']) if event_type == 'workflow.timeout'
     elsif event_type == 'worker.activity.update' &&
           params[:WorkerActivityName] == 'Offline'
 

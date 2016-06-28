@@ -75,7 +75,7 @@ RSpec.describe CallbackController, type: :controller do
         expect(MissedCall.count).to eq(0)
 
         post :events,
-             EventType: 'task.canceled',
+             EventType: 'workflow.timeout',
              TaskAttributes: task_attributes
 
         expect(MissedCall.count).to eq(1)
