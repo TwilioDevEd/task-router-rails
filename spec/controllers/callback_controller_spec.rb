@@ -23,6 +23,32 @@ RSpec.describe CallbackController, type: :controller do
   end
 
   describe 'POST #events' do
+    let(:client_double) { double(:client) }
+
+    before do
+      allow(Twilio::REST::Client).to receive(:new).and_return(client_double)
+    end
+
+    context 'received event is worker.activity.update' do
+      it 'notifies the worker that he/she has gone offline' do
+        messages_double   = double(:messages)
+        worker_number     = '+1234567890'
+        worker_attributes = "{\"contact_uri\":\"#{worker_number}\"}"
+        message_body      = 'Your status has changed to Offline. Reply with '\
+                            '"On" to get back Online'
+
+        expect(client_double).to receive_message_chain(:account, :messages).and_return(messages_double)
+        expect(messages_double)
+          .to receive(:create)
+          .with(from: ENV['TWILIO_NUMBER'], to: worker_number, body: message_body)
+
+        post :events,
+             EventType: 'worker.activity.update',
+             WorkerAttributes: worker_attributes,
+             WorkerActivityName: 'Offline'
+      end
+    end
+
     context 'received event is workflow.timeout or task.canceled' do
       from_number      = '+15551234567'
       selected_product = 'SMS'
@@ -36,11 +62,9 @@ RSpec.describe CallbackController, type: :controller do
         url_message   = { Message: message }.to_query
         redirect_url  =
           "http://twimlets.com/voicemail?Email=#{email}&#{url_message}"
-        client_double = double(:client)
         calls_double  = double(:calls)
         call_double   = double(:call)
 
-        allow(Twilio::REST::Client).to receive(:new).and_return(client_double)
         allow(client_double).to receive_message_chain(:account, :calls).and_return(calls_double)
         expect(calls_double).to receive(:get).with(call_sid).and_return(call_double)
         expect(call_double).to receive(:redirect_to)

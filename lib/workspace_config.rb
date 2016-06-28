@@ -9,7 +9,7 @@ class WorkspaceConfig
   ALICE_NUMBER            = ENV['ALICE_NUMBER'].freeze
 
   def self.setup
-    puts 'Configuring workspace...'
+    puts 'Configuring workspace, please wait ...'
     new.setup
     puts 'Workspace ready!'
   end

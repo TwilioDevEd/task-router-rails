@@ -22,12 +22,27 @@ class CallbackController < ApplicationController
       )
 
       redirect_to_voicemail(task_attributes['call_sid'])
+    elsif event_type == 'worker.activity.update' &&
+          params[:WorkerActivityName] == 'Offline'
+
+      worker_attributes = JSON.parse(params[:WorkerAttributes])
+      notify_offline_status(worker_attributes['contact_uri'])
     end
 
     render nothing: true
   end
 
   private
+
+  def notify_offline_status(phone_number)
+    message = 'Your status has changed to Offline. Reply with '\
+              '"On" to get back Online'
+    client.account.messages.create(
+      to: phone_number,
+      from: ENV['TWILIO_NUMBER'],
+      body: message
+    )
+  end
 
   def redirect_to_voicemail(call_sid)
     email         = ENV['MISSED_CALLS_EMAIL_ADDRESS']
@@ -36,8 +51,11 @@ class CallbackController < ApplicationController
     redirect_url  =
       "http://twimlets.com/voicemail?Email=#{email}&#{url_message}"
 
-    client = Twilio::REST::Client.new(ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN'])
-    call   = client.account.calls.get(call_sid)
+    call = client.account.calls.get(call_sid)
     call.redirect_to(redirect_url)
+  end
+
+  def client
+    Twilio::REST::Client.new(ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN'])
   end
 end
