@@ -54,4 +54,19 @@ describe TwimlGenerator do
         .to eq("{\"selected_product\": \"#{selected_product}\"}")
     end
   end
+
+  describe '.generate_confirm_message' do
+    it 'generates twiml with a message node' do
+      status = 'Idle'
+
+      xml_string = described_class.generate_confirm_message(status)
+      document   = Nokogiri::XML(xml_string)
+
+      message_node = document.root.child
+
+      expect(message_node.name).to eq('Message')
+      expect(message_node.content)
+        .to eq("Your status has changed to #{status}")
+    end
+  end
 end

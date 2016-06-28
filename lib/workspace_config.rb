@@ -23,11 +23,15 @@ class WorkspaceConfig
   def setup
     @workspace_sid = create_workspace
     @client = taskrouter_client
-    create_workers
+    WorkspaceInfo.instance.workers = create_workers
     queues = create_task_queues
     workflow_sid = create_workflow(queues).sid
     WorkspaceInfo.instance.workflow_sid = workflow_sid
-    WorkspaceInfo.instance.post_work_activity_sid = activity_by_name('Idle').sid
+    idle_activity_sid = activity_by_name('Idle').sid
+    WorkspaceInfo.instance.post_work_activity_sid = idle_activity_sid
+    WorkspaceInfo.instance.idle_activity_sid = idle_activity_sid
+    WorkspaceInfo.instance.offline_activity_sid = activity_by_name('Offline').sid
+    WorkspaceInfo.instance.workspace_sid = @workspace_sid
   end
 
   private
@@ -58,15 +62,20 @@ class WorkspaceConfig
     bob_attributes = "{\"products\": [\"ProgrammableSMS\"], \"contact_uri\": \"#{BOB_NUMBER}\"}"
     alice_attributes = "{\"products\": [\"ProgrammableVoice\"], \"contact_uri\": \"#{ALICE_NUMBER}\"}"
 
-    create_worker('Bob', bob_attributes)
-    create_worker('Alice', alice_attributes)
+    bob   = create_worker('Bob', bob_attributes)
+    alice = create_worker('Alice', alice_attributes)
+
+    {
+      BOB_NUMBER   => { sid: bob.sid,   name: 'Bob' },
+      ALICE_NUMBER => { sid: alice.sid, phone_number: 'Alice' }
+    }
   end
 
   def create_worker(name, attributes)
     client.workspace.workers.create(
       friendly_name: name,
-      attributes: attributes,
-      activity_sid: activity_by_name('Idle').sid
+      attributes:    attributes,
+      activity_sid:  activity_by_name('Idle').sid
     )
   end
 

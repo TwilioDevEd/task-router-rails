@@ -16,4 +16,10 @@ module TwimlGenerator
       end
     end.to_xml
   end
+
+  def self.generate_confirm_message(status)
+    Twilio::TwiML::Response.new do |r|
+      r.Message "Your status has changed to #{status}"
+    end.to_xml
+  end
 end
