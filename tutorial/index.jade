@@ -237,7 +237,7 @@
       [activities]: //www.twilio.com/docs/quickstart/python/taskrouter/setup-understanding-activities
 
   .step(data-title='Collecting Missed Calls', data-file='app/controllers/callback_controller.rb',
-    data-highlight='13-33,37-46')
+        data-highlight='13-33,37-46')
     :markdown
       ## Collecting Missed Calls
 
@@ -270,6 +270,28 @@
       [event-types]: //www.twilio.com/docs/api/taskrouter/events#event-types
       [twimlets]: //www.twilio.com/labs/twimlets
       [voicemail-twimlet]: //www.twilio.com/labs/twimlets/voicemail
+  
+  .step(data-title="Changing a Worker's Activity", data-file='app/controllers/message_controller.rb',
+        data-highlight='4-24')
+    :markdown
+      ## Changing a Worker's Activity
+
+      We have created this endpoint, so a worker can send an SMS message to the support
+      line Twilio number with the command "On" or "Off" to change their availability status.
+
+      This is important as a worker's activity will change to `Offline` when they miss
+      a call. When this happens, they receive an SMS letting them know that their activity
+      has changed, and that they can reply with the `On` command to make themselves
+      available for incoming calls again.
+
+      ---
+      **See Also:**
+      * [TaskRouter: Events](//www.twilio.com/docs/api/taskrouter/events)
+      * [TaskRouter: Event types][event-types]
+
+      [event-types]: //www.twilio.com/docs/api/taskrouter/events#event-types
+      [voicemail-twimlet]: //www.twilio.com/labs/twimlets/voicemail
+  
   .step
     :markdown
       ## Where to Next?
