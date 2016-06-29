@@ -34,16 +34,6 @@ class CallbackController < ApplicationController
 
   private
 
-  def notify_offline_status(phone_number)
-    message = 'Your status has changed to Offline. Reply with '\
-              '"On" to get back Online'
-    client.account.messages.create(
-      to: phone_number,
-      from: ENV['TWILIO_NUMBER'],
-      body: message
-    )
-  end
-
   def redirect_to_voicemail(call_sid)
     email         = ENV['MISSED_CALLS_EMAIL_ADDRESS']
     message       = 'Sorry, All agents are busy. Please leave a message. We\'ll call you as soon as possible'
@@ -53,6 +43,16 @@ class CallbackController < ApplicationController
 
     call = client.account.calls.get(call_sid)
     call.redirect_to(redirect_url)
+  end
+
+  def notify_offline_status(phone_number)
+    message = 'Your status has changed to Offline. Reply with '\
+              '"On" to get back Online'
+    client.account.messages.create(
+      to: phone_number,
+      from: ENV['TWILIO_NUMBER'],
+      body: message
+    )
   end
 
   def client
