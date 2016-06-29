@@ -10,9 +10,10 @@ gem 'twilio-ruby'
 group :development, :test do
   gem 'rspec-rails'
   gem 'pry'
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :development do
   gem 'web-console', '~> 2.0'
-  gem 'spring'
 end
