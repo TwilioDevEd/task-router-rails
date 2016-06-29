@@ -7,7 +7,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'twilio-ruby'
 
-group :development, :test do
+group :test do
   gem 'rspec-rails'
   gem 'pry'
   gem 'vcr'
