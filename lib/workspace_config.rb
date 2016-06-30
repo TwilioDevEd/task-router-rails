@@ -67,7 +67,7 @@ class WorkspaceConfig
 
     {
       BOB_NUMBER   => { sid: bob.sid,   name: 'Bob' },
-      ALICE_NUMBER => { sid: alice.sid, phone_number: 'Alice' }
+      ALICE_NUMBER => { sid: alice.sid, name: 'Alice' }
     }
   end
 
