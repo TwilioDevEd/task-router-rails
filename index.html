@@ -58,7 +58,7 @@ gem to create and configure the workspace</p>
 <p>Before creating a workspace, we&#39;ll always delete one if it has the same
 <code>friendly_name</code> as the one we are trying to create. In order to create a
 workspace you only need to provide a <code>friendly_name</code> and a <code>callback_url</code>
-where request will be made every time an event is triggered in our workspace.</p>
+where requests will be made every time an event is triggered in our workspace.</p>
 <hr>
 <p><strong>See Also:</strong></p>
 <ul>
@@ -107,7 +107,7 @@ as the public URL where a request will be made when this Workflow
 assigns a Task to a Worker. We will learn how to implement it on the next steps.</li>
 <li><code>task_reservation_timeout</code> as the maximum time we want to wait until a Worker is available for handling a Task.</li>
 <li><code>configuration</code> which is a set of rules for matching Tasks into Task Queues.
-The routing configuration will take a Task attributes and match with Task
+The routing configuration will take a Task attribute and match it with Task
 Queues. This application&#39;s Workflow rules are defined as:<ol>
 <li><code>&quot;selected_product==\&quot;ProgrammableSMS\&quot;&quot;</code> expression for <code>SMS</code> Task
 Queue. This expression will match any Task with <code>ProgrammableSMS</code> as
@@ -144,7 +144,7 @@ a key during the call.
 This request has a <code>Digits</code> parameter that holds the pressed keys.
 A <code>Task</code> will be created based on the pressed digit with the
 <code>selected_product</code> as an attribute. The Workflow will take this Task&#39;s
-attributes and match with the <a href="//www.twilio.com/docs/api/taskrouter/expression-syntax">configured
+attributes and match them with the <a href="//www.twilio.com/docs/api/taskrouter/expression-syntax">configured
 expressions</a>
 in order to find a Task Queue for this Task, so an appropriate available
 Worker can be assigned to handle it.</p>

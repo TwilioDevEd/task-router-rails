@@ -35,12 +35,13 @@
       configure a Workspace. This is possible either using the [TaskRouter
       Console](//www.twilio.com/console/taskrouter/workspaces) or
       programmatically through [TaskRouter REST API][api-main].
-      
+
       In this Ruby on Rails application this step will be executed in the initialization
       phase every time you run the app.
 
       A [Workspace][workspaces-doc] is the container element for any TaskRouter
       application. The elements are:
+
       * [Tasks][tasks-doc] - Represents a customer trying to contact an agent
       * [Workers][workers-doc] - The agents responsible for handling Tasks
       * [Task Queues][queues-doc] - Holds Tasks to be consumed by a set of Workers
@@ -71,7 +72,7 @@
       Before creating a workspace, we'll always delete one if it has the same
       `friendly_name` as the one we are trying to create. In order to create a
       workspace you only need to provide a `friendly_name` and a `callback_url`
-      where request will be made every time an event is triggered in our workspace.
+      where requests will be made every time an event is triggered in our workspace.
 
       ---
       **See Also:**
@@ -82,13 +83,13 @@
     data-highlight='61-80')
     :markdown
       ## Creating the Workers
-      
+
       We'll create two workers, Bob and Alice. They each hold two attributes:
       `contact_uri` with a phone number and `products` with a list of the products
       which each worker is specialized in. We also need to specify an `activity_sid`
       and a name for each worker. The selected activity will define the status of
       the worker.
-      
+
       A set of [default activities](//www.twilio.com/docs/api/taskrouter/activities#default-activities)
       is created with your workspace. We use the `Idle` activity to make a worker
       available for incoming calls.
@@ -132,7 +133,7 @@
          assigns a Task to a Worker. We will learn how to implement it on the next steps.
       1. `task_reservation_timeout` as the maximum time we want to wait until a Worker is available for handling a Task.
       1. `configuration` which is a set of rules for matching Tasks into Task Queues.
-         The routing configuration will take a Task attributes and match with Task
+         The routing configuration will take a Task attribute and match it with Task
          Queues. This application's Workflow rules are defined as:
          1. `"selected_product==\"ProgrammableSMS\""` expression for `SMS` Task
             Queue. This expression will match any Task with `ProgrammableSMS` as
@@ -175,7 +176,7 @@
       This request has a `Digits` parameter that holds the pressed keys.
       A `Task` will be created based on the pressed digit with the
       `selected_product` as an attribute. The Workflow will take this Task's
-      attributes and match with the [configured
+      attributes and match them with the [configured
       expressions](//www.twilio.com/docs/api/taskrouter/expression-syntax)
       in order to find a Task Queue for this Task, so an appropriate available
       Worker can be assigned to handle it.
@@ -269,7 +270,7 @@
       [event-types]: //www.twilio.com/docs/api/taskrouter/events#event-types
       [twimlets]: //www.twilio.com/labs/twimlets
       [voicemail-twimlet]: //www.twilio.com/labs/twimlets/voicemail
-  
+
   .step(data-title="Changing a Worker's Activity", data-file='app/controllers/message_controller.rb',
         data-highlight='4-24')
     :markdown
@@ -290,7 +291,7 @@
 
       [event-types]: //www.twilio.com/docs/api/taskrouter/events#event-types
       [voicemail-twimlet]: //www.twilio.com/labs/twimlets/voicemail
-  
+
   .step
     :markdown
       ## Where to Next?
