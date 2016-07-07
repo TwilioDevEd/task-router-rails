@@ -27,8 +27,9 @@ This project is built using [Ruby on Rails](http://rubyonrails.org/) Framework.
    $ bundle install
    ```
 
-1. Expose your application to the wider internet using [ngrok](http://ngrok.com). This step
-   is important because the application won't work as expected if you run it through
+1. Expose your application to the wider internet using [ngrok](http://ngrok.com).
+
+   This step is important because the application won't work as expected if you run it through
    localhost.
 
    ```bash
@@ -101,14 +102,15 @@ That's it!
 1. Select and option and the phone assigned to the product you selected (Bob or Alice's)
    will start ringing. You can answer the call and have a conversation.
 
-1. Alternatively, if you don't answer the call for 15 seconds, the call should be
+1. Alternatively, if you don't answer the call within 15 seconds, the call should be
    redirected to the next worker. If the call isn't answered by the second worker,
    you should be redirected to voice mail and leave a message. The transcription
    of that message should be sent to the email you specified in your environment variables.
 
-1. Each time a worker misses a call, their activity is changed to offline. You should
-   receive an SMS notification to the number that missed the call. You can reply
-   with `On` or `Off` to this SMS in order to change a worker's status.
+1. Each time a worker misses a call, their activity is changed to offline. Right after they
+   should receive a notification, via SMS, saying that they missed the call. In order to go
+   back online they can reply with `On`. They can as well reply with `Off` in order
+   to go back to offline status.
 
 1. If both workers' activity changes to `Offline` and you call your Twilio Number again,
    you should be redirected to voice mail after a few seconds as the workflow timeouts
