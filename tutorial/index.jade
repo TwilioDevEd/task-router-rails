@@ -4,20 +4,25 @@
       ## Application Overview
 
       In this tutorial we will show how to automate the routing of calls from
-      customers to your support agents. Customers will be able to select a
-      product and wait while TaskRouter tries to contact a product
-      specialist for the best support experience. If no one is available, our
-      application will save the customer's number and selected product so
-      an agent can call them back later on.
+      customers to your support agents. In this example customers would select
+      a product, then be connected to a specialist for that product. If no one
+      is available our customer's number will be saved so that our agent can
+      call them back.
+    
+      ### This is what the application does at a high level:
 
-      This is what the application does at a high level:
-
-      1. Configure a workspace using the Twilio's [TaskRouter REST API][api-main].
-      1. Listen for incoming calls and let the user select a product with the dial pad.
-      1. Create a Task with the selected product and let TaskRouter handle it.
-      1. Store missed calls so agents can return the call to customers.
-      1. Redirect users to a voice mail when no one answers the call.
-      1. Allow agents to change their status (Available/Offline) via SMS.
+      * Configure a workspace using the Twilio [TaskRouter REST API][api-
+      main].  
+      * Listen for incoming calls and let the user select a product
+      with the dial pad.  
+      * Create a Task with the selected product and let
+      TaskRouter handle it.  
+      * Store missed calls so agents can return the
+      call to customers.  
+      * Redirect users to a voice mail when no one
+      answers the call.  
+      * Allow agents to change their status
+      (Available/Offline) via SMS.
 
       ---
       **See Also:**
@@ -32,23 +37,22 @@
       ## Configuring the Workspace
 
       In order to instruct TaskRouter to handle the Tasks, we need to
-      configure a Workspace. This is possible either using the [TaskRouter
+      configure a Workspace. We can do this in the [TaskRouter
       Console](//www.twilio.com/console/taskrouter/workspaces) or
-      programmatically through [TaskRouter REST API][api-main].
+      programmatically using the [TaskRouter REST API][api-main].
       
-      In this Ruby on Rails application this step will be executed in the initialization
-      phase every time you run the app.
+      In this Rails application we'll do this setup when we start up the app.
 
       A [Workspace][workspaces-doc] is the container element for any TaskRouter
       application. The elements are:
       * [Tasks][tasks-doc] - Represents a customer trying to contact an agent
       * [Workers][workers-doc] - The agents responsible for handling Tasks
       * [Task Queues][queues-doc] - Holds Tasks to be consumed by a set of Workers
-      * [Workflows][workflows-doc] - Responsible for matching Tasks into Task Queues
+      * [Workflows][workflows-doc] - Responsible for placing Tasks into Task Queues
       * [Activities][activities-doc] - Possible states of a Worker. Eg: idle, offline, busy
 
       We'll use a `TaskRouterClient` provided in the [twilio-ruby][ruby-api-doc]
-      gem to create and configure the workspace
+      gem to create and configure the workspace.
 
       ---
       **See Also:**
@@ -68,10 +72,10 @@
     :markdown
       ## Creating a Workspace
 
-      Before creating a workspace, we'll always delete one if it has the same
+      Before creating a workspace, we need to delete any others with the same
       `friendly_name` as the one we are trying to create. In order to create a
-      workspace you only need to provide a `friendly_name` and a `callback_url`
-      where request will be made every time an event is triggered in our workspace.
+      workspace we need to provide a `friendly_name` and a `callback_url`
+      where a request will be made every time an event is triggered in our workspace.
 
       ---
       **See Also:**
@@ -83,9 +87,9 @@
     :markdown
       ## Creating the Workers
       
-      We'll create two workers, Bob and Alice. They each hold two attributes:
-      `contact_uri` with a phone number and `products` with a list of the products
-      which each worker is specialized in. We also need to specify an `activity_sid`
+      We'll create two workers, Bob and Alice. They each have two attributes:
+      `contact_uri` a phone number and `products`, a list of products
+      each worker is specialized in. We also need to specify an `activity_sid`
       and a name for each worker. The selected activity will define the status of
       the worker.
       
@@ -131,13 +135,15 @@
          as the public URL where a request will be made when this Workflow
          assigns a Task to a Worker. We will learn how to implement it on the next steps.
       1. `task_reservation_timeout` as the maximum time we want to wait until a Worker is available for handling a Task.
-      1. `configuration` which is a set of rules for matching Tasks into Task Queues.
-         The routing configuration will take a Task attributes and match with Task
+      1. `configuration` which is a set of rules for placing Tasks into Task Queues.
+         The routing configuration will take a Tasks' attributes and match this with Task
          Queues. This application's Workflow rules are defined as:
-         1. `"selected_product==\"ProgrammableSMS\""` expression for `SMS` Task
+         1. `"selected_product==\
+         "ProgrammableSMS\""` expression for `SMS` Task
             Queue. This expression will match any Task with `ProgrammableSMS` as
             the `selected_product` attribute.
-         1. `"selected_product==\"ProgrammableVoice\""` expression for `Voice`
+         1. `"selected_product==\
+         "ProgrammableVoice\""` expression for `Voice`
             Task Queue.
 
       ---
@@ -153,16 +159,14 @@
       URL specified on the [number's configuration](//www.twilio.com/console/phone-numbers/incoming).
 
       The endpoint will then process the request and generate a TwiML response.
-      We'll use the Say verb to give the user product alternatives, and a key
-      they can press in order to select one. The Gather verb allows us to
+      We'll use the [Say](//www.twilio.com/docs/api/twiml/say) verb to give the user product alternatives, and a key
+      they can press in order to select one. The [Gather](//www.twilio.com/docs/api/twiml/gather) verb allows us to
       capture the user's key press.
 
       ---
       **See Also:**
       * [Twilio webhooks](//www.twilio.com/platform/webhooks)
       * [TwiML Voice: Your Response](//www.twilio.com/docs/api/twiml/your_response)
-      * [TwiML Voice: <Say> verb](//www.twilio.com/docs/api/twiml/say)
-      * [TwiML Voice: <Gather> verb](//www.twilio.com/docs/api/twiml/gather)
 
   .step(data-title='Creating a Task', data-file='lib/twiml_generator.rb',
     data-highlight='12-18')
@@ -213,7 +217,7 @@
       Handling this [Assignment Callback][assignment-callback] is a key
       component of building a TaskRouter application as we can instruct how the
       Worker will handle a Task. We could send a text, e-mail, push
-      notifications or deliver a call.
+      notifications or make a call.
 
       Since we created this Task during a voice call with an `Enqueue` verb,
       let's [instruct TaskRouter to dequeue][dequeue-section] the call and dial
@@ -244,16 +248,13 @@
       is triggered. In our application, we are trying to collect missed calls,
       so we would like to handle the `workflow.timeout` event. This event is
       triggered when the Task waits more than the limit set on Workflow
-      Configuration, which happens when no available worker is found after
-      trying out all possible Task Queues configured as rules for this
-      Workflow.
+      Configuration-- or rather when no worker is available.
 
-      Here we use TwilioRestClient to route this call into a [Voicemail
+      Here we use TwilioRestClient to route this call to a [Voicemail
       Twimlet][voicemail-twimlet]. Twimlets are tiny web applications for
       voice.  This one will generate a `TwiML` response using `Say` verb and
-      record a message using `Record` verb. After recorded, the message will be
-      transcribed and sent to the mail address we configured on
-      `MISSED_CALLS_EMAIL_ADDRESS` environment variable.
+      record a message using `Record` verb. The recorded message will then be
+      transcribed and sent to the email address configured.
 
       Note that we are also listening for `task.canceled`. This is triggered
       when the customer hangs up before being assigned to an agent, therefore
@@ -276,7 +277,7 @@
       ## Changing a Worker's Activity
 
       We have created this endpoint, so a worker can send an SMS message to the support
-      line Twilio number with the command "On" or "Off" to change their availability status.
+      line with the command "On" or "Off" to change their availability status.
 
       This is important as a worker's activity will change to `Offline` when they miss
       a call. When this happens, they receive an SMS letting them know that their activity
