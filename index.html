@@ -41,7 +41,8 @@ answers the call.  </li>
 configure a Workspace. We can do this in the <a href="//www.twilio.com/console/taskrouter/workspaces">TaskRouter
 Console</a> or
 programmatically using the <a href="//www.twilio.com/docs/api/taskrouter/rest-api">TaskRouter REST API</a>.</p>
-<p>In this Rails application we&#39;ll do this setup when we start up the app.</p>
+<p>In this Ruby on Rails application this step will be executed in the initialization
+phase every time you run the app.</p>
 <p>A <a href="//www.twilio.com/docs/api/taskrouter/workspaces">Workspace</a> is the container element for any TaskRouter
 application. The elements are:</p>
 <ul>
@@ -62,7 +63,7 @@ gem to create and configure the workspace.</p>
 <p>Before creating a workspace, we need to delete any others with the same
 <code>friendly_name</code> as the one we are trying to create. In order to create a
 workspace we need to provide a <code>friendly_name</code> and a <code>callback_url</code>
-where a request will be made every time an event is triggered in our workspace.</p>
+where a requests will be made every time an event is triggered in our workspace.</p>
 <hr>
 <p><strong>See Also:</strong></p>
 <ul>
@@ -111,7 +112,7 @@ as the public URL where a request will be made when this Workflow
 assigns a Task to a Worker. We will learn how to implement it on the next steps.</li>
 <li><code>task_reservation_timeout</code> as the maximum time we want to wait until a Worker is available for handling a Task.</li>
 <li><code>configuration</code> which is a set of rules for placing Tasks into Task Queues.
-The routing configuration will take a Tasks&#39; attributes and match this with Task
+The routing configuration will take a Task&#39;s attribute and match this with Task
 Queues. This application&#39;s Workflow rules are defined as:<ol>
 <li><code>&quot;selected_product==\
 &quot;ProgrammableSMS\&quot;&quot;</code> expression for <code>SMS</code> Task
@@ -132,16 +133,14 @@ Task Queue.</li>
 <p>Right after receiving a call, Twilio will send a request to the
 URL specified on the <a href="//www.twilio.com/console/phone-numbers/incoming">number&#39;s configuration</a>.</p>
 <p>The endpoint will then process the request and generate a TwiML response.
-We&#39;ll use the Say verb to give the user product alternatives, and a key
-they can press in order to select one. The Gather verb allows us to
+We&#39;ll use the <a href="//www.twilio.com/docs/api/twiml/say">Say</a> verb to give the user product alternatives, and a key
+they can press in order to select one. The <a href="//www.twilio.com/docs/api/twiml/gather">Gather</a> verb allows us to
 capture the user&#39;s key press.</p>
 <hr>
 <p><strong>See Also:</strong></p>
 <ul>
 <li><a href="//www.twilio.com/platform/webhooks">Twilio webhooks</a></li>
 <li><a href="//www.twilio.com/docs/api/twiml/your_response">TwiML Voice: Your Response</a></li>
-<li><a href="//www.twilio.com/docs/api/twiml/say">TwiML Voice: &lt;Say&gt; verb</a></li>
-<li><a href="//www.twilio.com/docs/api/twiml/gather">TwiML Voice: &lt;Gather&gt; verb</a></li>
 </ul>
 </div><div data-title="Creating a Task" data-file="lib/twiml_generator.rb" data-highlight="12-18" class="step"><h2 id="creating-a-task">Creating a Task</h2>
 <p>This is the endpoint set as the <code>action</code> URL on the <code>Gather</code> verb on the
@@ -150,7 +149,7 @@ a key during the call.
 This request has a <code>Digits</code> parameter that holds the pressed keys.
 A <code>Task</code> will be created based on the pressed digit with the
 <code>selected_product</code> as an attribute. The Workflow will take this Task&#39;s
-attributes and match with the <a href="//www.twilio.com/docs/api/taskrouter/expression-syntax">configured
+attributes and match them with the <a href="//www.twilio.com/docs/api/taskrouter/expression-syntax">configured
 expressions</a>
 in order to find a Task Queue for this Task, so an appropriate available
 Worker can be assigned to handle it.</p>
@@ -181,7 +180,7 @@ and the Reservation.</li>
 <p>Handling this <a href="//www.twilio.com/docs/api/taskrouter/handling-assignment-callbacks">Assignment Callback</a> is a key
 component of building a TaskRouter application as we can instruct how the
 Worker will handle a Task. We could send a text, e-mail, push
-notifications or deliver a call.</p>
+notifications or make a call.</p>
 <p>Since we created this Task during a voice call with an <code>Enqueue</code> verb,
 let&#39;s <a href="//www.twilio.com/docs/api/taskrouter/handling-assignment-callbacks#dequeue-call">instruct TaskRouter to dequeue</a> the call and dial
 a Worker. If we do not specify a <code>to</code> parameter with a
@@ -200,15 +199,12 @@ phone number, TaskRouter will pick the Worker&#39;s <code>contact_uri</code> att
 is triggered. In our application, we are trying to collect missed calls,
 so we would like to handle the <code>workflow.timeout</code> event. This event is
 triggered when the Task waits more than the limit set on Workflow
-Configuration, which happens when no available worker is found after
-trying out all possible Task Queues configured as rules for this
-Workflow.</p>
-<p>Here we use TwilioRestClient to route this call into a <a href="//www.twilio.com/labs/twimlets/voicemail">Voicemail
+Configuration-- or rather when no worker is available.</p>
+<p>Here we use TwilioRestClient to route this call to a <a href="//www.twilio.com/labs/twimlets/voicemail">Voicemail
 Twimlet</a>. Twimlets are tiny web applications for
 voice.  This one will generate a <code>TwiML</code> response using <code>Say</code> verb and
-record a message using <code>Record</code> verb. After recorded, the message will be
-transcribed and sent to the mail address we configured on
-<code>MISSED_CALLS_EMAIL_ADDRESS</code> environment variable.</p>
+record a message using <code>Record</code> verb. The recorded message will then be
+transcribed and sent to the email address configured.</p>
 <p>Note that we are also listening for <code>task.canceled</code>. This is triggered
 when the customer hangs up before being assigned to an agent, therefore
 canceling the task. Capturing this event allows us to collect the
@@ -222,7 +218,7 @@ information from the customers that hang up before the Workflow times out.</p>
 </ul>
 </div><div data-title="Changing a Worker's Activity" data-file="app/controllers/message_controller.rb" data-highlight="4-24" class="step"><h2 id="changing-a-worker-s-activity">Changing a Worker&#39;s Activity</h2>
 <p>We have created this endpoint, so a worker can send an SMS message to the support
-line Twilio number with the command &quot;On&quot; or &quot;Off&quot; to change their availability status.</p>
+line with the command &quot;On&quot; or &quot;Off&quot; to change their availability status.</p>
 <p>This is important as a worker&#39;s activity will change to <code>Offline</code> when they miss
 a call. When this happens, they receive an SMS letting them know that their activity
 has changed, and that they can reply with the <code>On</code> command to make themselves
