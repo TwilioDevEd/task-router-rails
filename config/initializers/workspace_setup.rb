@@ -1,1 +1,1 @@
-WorkspaceConfig.setup unless ENV['RAILS_ENV'] == 'test'
+# WorkspaceConfig.setup unless ENV['RAILS_ENV'] == 'test'

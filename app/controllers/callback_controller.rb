@@ -41,14 +41,13 @@ class CallbackController < ApplicationController
     redirect_url  =
       "http://twimlets.com/voicemail?Email=#{email}&#{url_message}"
 
-    call = client.account.calls.get(call_sid)
-    call.redirect_to(redirect_url)
+    call = client.calls(call_sid).update(url: redirect_url)
   end
 
   def notify_offline_status(phone_number)
     message = 'Your status has changed to Offline. Reply with '\
               '"On" to get back Online'
-    client.account.messages.create(
+    client.messages.create(
       to: phone_number,
       from: ENV['TWILIO_NUMBER'],
       body: message

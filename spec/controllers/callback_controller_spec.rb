@@ -37,7 +37,7 @@ RSpec.describe CallbackController, type: :controller do
         message_body      = 'Your status has changed to Offline. Reply with '\
                             '"On" to get back Online'
 
-        expect(client_double).to receive_message_chain(:account, :messages).and_return(messages_double)
+        expect(client_double).to receive(:messages).and_return(messages_double)
         expect(messages_double)
           .to receive(:create)
           .with(from: ENV['TWILIO_NUMBER'], to: worker_number, body: message_body)
@@ -74,13 +74,11 @@ RSpec.describe CallbackController, type: :controller do
         url_message   = { Message: message }.to_query
         redirect_url  =
           "http://twimlets.com/voicemail?Email=#{email}&#{url_message}"
-        calls_double  = double(:calls)
         call_double   = double(:call)
 
-        allow(client_double).to receive_message_chain(:account, :calls).and_return(calls_double)
-        expect(calls_double).to receive(:get).with(call_sid).and_return(call_double)
-        expect(call_double).to receive(:redirect_to)
-          .with(redirect_url)
+        allow(client_double).to receive(:calls).with(call_sid).and_return(call_double)
+        expect(call_double).to receive(:update)
+          .with(url: redirect_url)
 
         post :events,
              EventType: 'workflow.timeout',
@@ -95,7 +93,7 @@ RSpec.describe CallbackController, type: :controller do
       end
 
       it 'doesn\'t redirect the call' do
-        expect(client_double).to_not receive(:account)
+        expect(client_double).to_not receive(:calls)
 
         post :events, EventType: 'any.event'
       end
