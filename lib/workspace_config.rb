@@ -24,8 +24,7 @@ class WorkspaceConfig
     @workspace_sid = create_workspace
     @client = taskrouter_client
     WorkspaceInfo.instance.workers = create_workers
-    queues = create_task_queues
-    workflow_sid = create_workflow(queues).sid
+    workflow_sid = create_workflow.sid
     WorkspaceInfo.instance.workflow_sid = workflow_sid
     idle_activity_sid = activity_by_name('Idle').sid
     WorkspaceInfo.instance.post_work_activity_sid = idle_activity_sid
@@ -39,11 +38,12 @@ class WorkspaceConfig
   attr_reader :client, :account_sid, :auth_token
 
   def taskrouter_client
-    Twilio::REST::TaskRouterClient.new(
+    client_instance = Twilio::REST::Client.new(
       account_sid,
-      auth_token,
-      workspace_sid
+      auth_token
     )
+
+    client_instance.taskrouter.v1
   end
 
   def create_workspace
@@ -72,7 +72,7 @@ class WorkspaceConfig
   end
 
   def create_worker(name, attributes)
-    client.workspace.workers.create(
+    client.workspaces(@workspace_sid).workers.create(
       friendly_name: name,
       attributes:    attributes,
       activity_sid:  activity_by_name('Idle').sid
@@ -80,7 +80,7 @@ class WorkspaceConfig
   end
 
   def activity_by_name(name)
-    client.workspace.activities.list(friendly_name: name).first
+    client.workspaces(@workspace_sid).activities.list(friendly_name: name).first
   end
 
   def create_task_queues
@@ -102,7 +102,7 @@ class WorkspaceConfig
   end
 
   def create_task_queue(name, reservation_sid, assignment_sid, target_workers)
-    client.workspace.task_queues.create(
+    client.workspaces(@workspace_sid).task_queues.create(
       friendly_name: name,
       reservation_activity_sid: reservation_sid,
       assignment_activity_sid: assignment_sid,
@@ -110,18 +110,11 @@ class WorkspaceConfig
     )
   end
 
-  def create_workflow(queues)
-    default_rule_target = create_rule_target(queues[:all].sid, 1, QUEUE_TIMEOUT, '1==1')
-    voice_rule_target   = create_rule_target(queues[:voice].sid, 5, QUEUE_TIMEOUT, nil)
-    sms_rule_target     = create_rule_target(queues[:sms].sid, 5, QUEUE_TIMEOUT, nil)
-    voice_rule = create_rule('selected_product=="ProgrammableVoice"',
-                             [voice_rule_target, default_rule_target])
-    sms_rule   = create_rule('selected_product=="ProgrammableSMS"',
-                             [sms_rule_target, default_rule_target])
+  def create_workflow
+    queues = create_task_queues
+    config = workflow_config(queues)
 
-    rules = [voice_rule, sms_rule]
-    config = Twilio::TaskRouter::WorkflowConfiguration.new(rules, default_rule_target)
-    client.workspace.workflows.create(
+    client.workspaces(@workspace_sid).workflows.create(
       configuration: config.to_json,
       friendly_name: WORKFLOW_NAME,
       assignment_callback_url: ASSIGNMENT_CALLBACK_URL,
@@ -130,16 +123,28 @@ class WorkspaceConfig
     )
   end
 
-  def create_rule_target(queue_sid, priority, timeout, expression)
-    Twilio::TaskRouter::WorkflowRuleTarget.new(queue_sid, priority, timeout,
-                                               expression)
-  end
-
-  def create_rule(expression, targets)
-    Twilio::TaskRouter::WorkflowRule.new(expression, targets)
-  end
-
   def workspace_sid
     @workspace_sid || 'no_workspace_yet'
+  end
+
+  def workflow_config(queues)
+    {
+      task_routing: {
+        filters: [
+          {
+            expression: 'selected_product=="ProgrammableVoice"',
+            targets: [{ queue: queues[:voice].sid }]
+          },
+          {
+            expression: 'selected_product=="ProgrammableSMS"',
+            targets: [{ queue: queues[:sms].sid }]
+          }
+        ],
+        default_filter: {
+          expression: '1==1',
+          targets: [{ queue: queues[:all].sid }]
+        }
+      }
+    }
   end
 end

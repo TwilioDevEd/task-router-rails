@@ -26,10 +26,9 @@ class MessageController < ApplicationController
   private
 
   def client
-    Twilio::REST::TaskRouterClient.new(
+    Twilio::REST::Client.new(
       ENV['TWILIO_ACCOUNT_SID'],
-      ENV['TWILIO_AUTH_TOKEN'],
-      WorkspaceInfo.instance.workspace_sid
+      ENV['TWILIO_AUTH_TOKEN']
     )
   end
 end

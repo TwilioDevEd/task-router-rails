@@ -949,4 +949,60 @@ http_interactions:
         "next_page_url": null, "key": "activities"}}'
     http_version: 
   recorded_at: Wed, 29 Jun 2016 15:27:29 GMT
+- request:
+    method: post
+    uri: https://<TWILIO ACCOUNT SID>:<TWILIO AUTH TOKEN>@taskrouter.twilio.com/v1/Workspaces//TaskQueues
+    body:
+      encoding: UTF-8
+      string: AssignmentActivitySid=WAb697a77d7c32451bf7c5ba13092520db&FriendlyName=Voice&ReservationActivitySid=WA25980f4fd950d089a4432c0f8f9020d0&TargetWorkers=products+HAS+%27ProgrammableVoice%27
+    headers:
+      User-Agent:
+      - twilio-ruby/5.0.0.rc21 (ruby/x86_64-linux 2.3.1-p112)
+      Accept-Charset:
+      - utf-8
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 404
+      message: NOT FOUND
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - Accept, Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match,
+        If-Unmodified-Since
+      Access-Control-Allow-Methods:
+      - GET, POST, DELETE, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - ETag
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 15 Jun 2017 19:15:27 GMT
+      Twilio-Request-Duration:
+      - '0.002'
+      Twilio-Request-Id:
+      - RQ0d217dd38c6241949f3c6e293bbf89bc
+      X-Powered-By:
+      - AT-5000
+      X-Shenanigans:
+      - none
+      Content-Length:
+      - '162'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"code": 20404, "message": "The requested resource /Workspaces//TaskQueues
+        was not found", "more_info": "https://www.twilio.com/docs/errors/20404", "status":
+        404}'
+    http_version: 
+  recorded_at: Thu, 15 Jun 2017 19:15:27 GMT
 recorded_with: VCR 3.0.0
