@@ -48,7 +48,7 @@ class CallbackController < ApplicationController
   def notify_offline_status(phone_number)
     message = 'Your status has changed to Offline. Reply with '\
               '"On" to get back Online'
-    client.account.messages.create(
+    client.messages.create(
       to: phone_number,
       from: ENV['TWILIO_NUMBER'],
       body: message
