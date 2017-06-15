@@ -128,34 +128,41 @@ class WorkspaceConfig
   end
 
   def workflow_config(queues)
-    result = {
+    default_target = default_rule_target(queues[:all].sid)
+
+    {
       task_routing: {
         filters: [
           {
             expression: 'selected_product=="ProgrammableVoice"',
             targets: [
-              { queue: queues[:voice].sid, priority: 5, timeout: QUEUE_TIMEOUT },
-              { queue: queues[:all].sid, priority: 1, timeout: QUEUE_TIMEOUT, expression: '1==1' }
+              rule_target(queues[:voice].sid),
+              default_target
             ]
           },
           {
             expression: 'selected_product=="ProgrammableSMS"',
             targets: [
-              { queue: queues[:sms].sid, priority: 5, timeout: QUEUE_TIMEOUT },
-              { queue: queues[:all].sid, priority: 1, timeout: QUEUE_TIMEOUT, expression: '1==1' }
+              rule_target(queues[:sms].sid),
+              default_target
             ]
           }
         ],
-        default_filter: {
-          expression: '1==1',
-          queue: queues[:all].sid,
-          priority: 1,
-          timeout: QUEUE_TIMEOUT 
-        }
+        default_filter: default_target
       }
     }
+  end
 
-    require 'byebug'; byebug
-    result
+  def rule_target(sid)
+    { queue: sid, priority: 5, timeout: QUEUE_TIMEOUT }
+  end
+
+  def default_rule_target(sid)
+    {
+      queue: sid,
+      priority: 1,
+      timeout: QUEUE_TIMEOUT,
+      expression: '1==1'
+    }
   end
 end
