@@ -41,8 +41,7 @@ class CallbackController < ApplicationController
     redirect_url  =
       "http://twimlets.com/voicemail?Email=#{email}&#{url_message}"
 
-    call = client.account.calls.get(call_sid)
-    call.redirect_to(redirect_url)
+    client.calls(call_sid).update(url: redirect_url)
   end
 
   def notify_offline_status(phone_number)
