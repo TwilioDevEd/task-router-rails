@@ -148,7 +148,7 @@ GEM
     thread_safe (0.3.5)
     turbolinks (2.5.3)
       coffee-rails
-    twilio-ruby (5.0.0.rc22)
+    twilio-ruby (5.0.0.rc23)
       faraday (~> 0.9)
       jwt (~> 1.5)
       libxml-ruby (= 3.0.0)
@@ -178,7 +178,7 @@ DEPENDENCIES
   rspec-rails
   sqlite3
   turbolinks
-  twilio-ruby (~> 5.0.0.rc22)
+  twilio-ruby (~> 5.0.0.rc23)
   uglifier (>= 1.3.0)
   vcr
   web-console (~> 2.0)
