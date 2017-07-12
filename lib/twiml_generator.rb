@@ -9,7 +9,7 @@ module TwimlGenerator
       'or press 2 for programmable SMS'
 
     response.append(gather)
-    response.to_xml_str
+    response.to_s
   end
 
   def self.generate_task_enqueue(selected_product)
@@ -18,12 +18,12 @@ module TwimlGenerator
 
     response = Twilio::TwiML::VoiceResponse.new
     response.append(enqueue)
-    response.to_xml_str
+    response.to_s
   end
 
   def self.generate_confirm_message(status)
     response = Twilio::TwiML::MessagingResponse.new
-    response.message "Your status has changed to #{status}"
-    response.to_xml_str
+    response.message(body: "Your status has changed to #{status}")
+    response.to_s
   end
 end
