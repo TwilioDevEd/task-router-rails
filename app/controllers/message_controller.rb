@@ -15,9 +15,9 @@ class MessageController < ApplicationController
 
     worker_sid = WorkspaceInfo.instance.workers[from_number][:sid]
     client
-      .workspace
-      .workers
-      .get(worker_sid)
+      .workspaces(WorkspaceInfo.instance.workspace_sid)
+      .workers(worker_sid)
+      .fetch
       .update(activity_sid: activity_sid)
 
     render xml: TwimlGenerator.generate_confirm_message(status)
@@ -26,10 +26,11 @@ class MessageController < ApplicationController
   private
 
   def client
-    Twilio::REST::TaskRouterClient.new(
+    client_instance = Twilio::REST::Client.new(
       ENV['TWILIO_ACCOUNT_SID'],
-      ENV['TWILIO_AUTH_TOKEN'],
-      WorkspaceInfo.instance.workspace_sid
+      ENV['TWILIO_AUTH_TOKEN']
     )
+
+    client_instance.taskrouter.v1
   end
 end

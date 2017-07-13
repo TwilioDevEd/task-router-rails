@@ -18,9 +18,10 @@ RSpec.describe MessageController, type: :controller do
         workers_double = double(:workers)
         worker_double  = double(:worker)
 
-        allow(Twilio::REST::TaskRouterClient).to receive(:new).and_return(client_double)
-        allow(client_double).to receive_message_chain(:workspace, :workers).and_return(workers_double)
-        expect(workers_double).to receive(:get).with(worker_sid).and_return(worker_double)
+        allow(Twilio::REST::Client).to receive_message_chain(:new, :taskrouter, :v1)
+          .and_return(client_double)
+        allow(client_double).to receive_message_chain(:workspaces, :workers).and_return(workers_double)
+        expect(workers_double).to receive(:fetch).and_return(worker_double)
         expect(worker_double).to receive(:update).with(activity_sid: idle_activity_sid)
 
         expected_response = '<Response></Response>'
