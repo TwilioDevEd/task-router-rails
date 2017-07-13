@@ -14,13 +14,18 @@ RSpec.describe MessageController, type: :controller do
         WorkspaceInfo.instance.idle_activity_sid = idle_activity_sid
         WorkspaceInfo.instance.workspace_sid = workspace_sid
 
-        client_double  = double(:client)
-        workers_double = double(:workers)
-        worker_double  = double(:worker)
+        client_double     = double(:client)
+        taskrouter_double = double(:taskrouter)
+        workspace_double  = double(:workspace)
+        worker_double     = double(:worker)
 
-        allow(Twilio::REST::TaskRouterClient).to receive(:new).and_return(client_double)
-        allow(client_double).to receive_message_chain(:workspace, :workers).and_return(workers_double)
-        expect(workers_double).to receive(:get).with(worker_sid).and_return(worker_double)
+        allow(Twilio::REST::Client).to receive(:new).and_return(client_double)
+        allow(client_double).to receive(:taskrouter)
+          .and_return(taskrouter_double)
+        allow(taskrouter_double).to receive(:workspaces)
+          .with(workspace_sid).and_return(workspace_double)
+
+        expect(workspace_double).to receive(:workers).with(worker_sid).and_return(worker_double)
         expect(worker_double).to receive(:update).with(activity_sid: idle_activity_sid)
 
         expected_response = '<Response></Response>'

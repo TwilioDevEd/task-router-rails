@@ -22,7 +22,6 @@ class WorkspaceConfig
 
   def setup
     @workspace_sid = create_workspace
-    @client = taskrouter_client
     WorkspaceInfo.instance.workers = create_workers
     queues = create_task_queues
     workflow_sid = create_workflow(queues).sid
@@ -36,14 +35,10 @@ class WorkspaceConfig
 
   private
 
-  attr_reader :client, :account_sid, :auth_token
+  attr_reader :client, :account_sid, :auth_token, :workspace_sid
 
   def taskrouter_client
-    Twilio::REST::TaskRouterClient.new(
-      account_sid,
-      auth_token,
-      workspace_sid
-    )
+    Twilio::REST::Client.new(account_sid, auth_token).taskrouter
   end
 
   def create_workspace
@@ -72,7 +67,7 @@ class WorkspaceConfig
   end
 
   def create_worker(name, attributes)
-    client.workspace.workers.create(
+    client.workspaces(workspace_sid).workers.create(
       friendly_name: name,
       attributes:    attributes,
       activity_sid:  activity_by_name('Idle').sid
@@ -102,7 +97,7 @@ class WorkspaceConfig
   end
 
   def create_task_queue(name, reservation_sid, assignment_sid, target_workers)
-    client.workspace.task_queues.create(
+    client.workspaces(workspace_sid).task_queues.create(
       friendly_name: name,
       reservation_activity_sid: reservation_sid,
       assignment_activity_sid: assignment_sid,
