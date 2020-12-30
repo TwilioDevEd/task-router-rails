@@ -4,7 +4,7 @@ gem 'rails', '4.2.6'
 gem 'sqlite3'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
-gem 'turbolinks'
+gem 'turbolinks', '>= 2.5.3'
 gem 'twilio-ruby', '>= 5.0.0'
 
 group :test do
