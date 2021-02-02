@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://<TWILIO ACCOUNT SID>:<TWILIO AUTH TOKEN>@taskrouter.twilio.com/v1/Workspaces?FriendlyName=Rails%20Workspace
+    uri: https://taskrouter.twilio.com/v1/Workspaces?FriendlyName=RailsWorkspace
     body:
       encoding: US-ASCII
       string: ''
@@ -51,8 +51,8 @@ http_interactions:
       - keep-alive
     body:
       encoding: UTF-8
-      string: '{"meta": {"page": 0, "page_size": 50, "first_page_url": "https://taskrouter.twilio.com/v1/Workspaces?FriendlyName=Rails+Workspace&PageSize=50&Page=0",
-        "previous_page_url": null, "url": "https://taskrouter.twilio.com/v1/Workspaces?FriendlyName=Rails+Workspace&PageSize=50&Page=0",
+      string: '{"meta": {"page": 0, "page_size": 50, "first_page_url": "https://taskrouter.twilio.com/v1/Workspaces?FriendlyName=RailsWorkspace&PageSize=50&Page=0",
+        "previous_page_url": null, "url": "https://taskrouter.twilio.com/v1/Workspaces?FriendlyName=RailsWorkspace&PageSize=50&Page=0",
         "next_page_url": null, "key": "workspaces"}, "workspaces": [{"sid": "WSd269cddf631d0dc314b0d22d6f8dad97",
         "account_sid": "<TWILIO ACCOUNT SID>", "friendly_name": "Rails Workspace",
         "event_callback_url": "https://0895379f.ngrok.io/events", "default_activity_sid":
@@ -67,11 +67,10 @@ http_interactions:
         "workers": "https://taskrouter.twilio.com/v1/Workspaces/WSd269cddf631d0dc314b0d22d6f8dad97/Workers",
         "workflows": "https://taskrouter.twilio.com/v1/Workspaces/WSd269cddf631d0dc314b0d22d6f8dad97/Workflows",
         "task_channels": "https://taskrouter.twilio.com/v1/Workspaces/WSd269cddf631d0dc314b0d22d6f8dad97/TaskChannels"}}]}'
-    http_version: 
   recorded_at: Wed, 29 Jun 2016 15:27:24 GMT
 - request:
     method: delete
-    uri: https://<TWILIO ACCOUNT SID>:<TWILIO AUTH TOKEN>@taskrouter.twilio.com/v1/Workspaces/WSd269cddf631d0dc314b0d22d6f8dad97
+    uri: https://taskrouter.twilio.com/v1/Workspaces/WSd269cddf631d0dc314b0d22d6f8dad97
     body:
       encoding: US-ASCII
       string: ''
@@ -121,14 +120,13 @@ http_interactions:
     body:
       encoding: UTF-8
       string: ''
-    http_version: 
   recorded_at: Wed, 29 Jun 2016 15:27:24 GMT
 - request:
     method: post
-    uri: https://<TWILIO ACCOUNT SID>:<TWILIO AUTH TOKEN>@taskrouter.twilio.com/v1/Workspaces
+    uri: https://taskrouter.twilio.com/v1/Workspaces
     body:
       encoding: US-ASCII
-      string: FriendlyName=Rails+Workspace&EventCallbackUrl=https%3A%2F%2F0895379f.ngrok.io%2Fevents
+      string: FriendlyName=RailsWorkspace&EventCallbackUrl=https%3A%2F%2F0895379f.ngrok.io%2Fevents
     headers:
       Accept:
       - application/json
@@ -193,11 +191,10 @@ http_interactions:
         "workers": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Workers",
         "workflows": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Workflows",
         "task_channels": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/TaskChannels"}}'
-    http_version: 
   recorded_at: Wed, 29 Jun 2016 15:27:25 GMT
 - request:
     method: get
-    uri: https://<TWILIO ACCOUNT SID>:<TWILIO AUTH TOKEN>@taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities?FriendlyName=Idle
+    uri: https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities?FriendlyName=Available
     body:
       encoding: US-ASCII
       string: ''
@@ -248,17 +245,16 @@ http_interactions:
       encoding: UTF-8
       string: '{"activities": [{"sid": "WA3f4691c986746456ed5dd8db1c9783c9", "account_sid":
         "<TWILIO ACCOUNT SID>", "workspace_sid": "WS85b6a3a66f40c51c00b31bcbcadef5cc",
-        "friendly_name": "Idle", "available": true, "date_created": "2016-06-29T15:27:23Z",
+        "friendly_name": "Available", "available": true, "date_created": "2016-06-29T15:27:23Z",
         "date_updated": "2016-06-29T15:27:23Z", "url": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities/WA3f4691c986746456ed5dd8db1c9783c9",
         "links": {"workspace": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc"}}],
-        "meta": {"page": 0, "page_size": 50, "first_page_url": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities?FriendlyName=Idle&PageSize=50&Page=0",
-        "previous_page_url": null, "url": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities?FriendlyName=Idle&PageSize=50&Page=0",
+        "meta": {"page": 0, "page_size": 50, "first_page_url": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities?FriendlyName=Available&PageSize=50&Page=0",
+        "previous_page_url": null, "url": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities?FriendlyName=Available&PageSize=50&Page=0",
         "next_page_url": null, "key": "activities"}}'
-    http_version: 
   recorded_at: Wed, 29 Jun 2016 15:27:25 GMT
 - request:
     method: post
-    uri: https://<TWILIO ACCOUNT SID>:<TWILIO AUTH TOKEN>@taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Workers
+    uri: https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Workers
     body:
       encoding: US-ASCII
       string: FriendlyName=Bob&Attributes=%7B%22products%22%3A+%5B%22ProgrammableSMS%22%5D%2C+%22contact_uri%22%3A+%22%2B593992670240%22%7D&ActivitySid=WA3f4691c986746456ed5dd8db1c9783c9
@@ -311,7 +307,7 @@ http_interactions:
       encoding: UTF-8
       string: '{"sid": "WK05f63e34660b14bd602848cdae7aec81", "friendly_name": "Bob",
         "account_sid": "<TWILIO ACCOUNT SID>", "activity_sid": "WA3f4691c986746456ed5dd8db1c9783c9",
-        "activity_name": "Idle", "workspace_sid": "WS85b6a3a66f40c51c00b31bcbcadef5cc",
+        "activity_name": "Available", "workspace_sid": "WS85b6a3a66f40c51c00b31bcbcadef5cc",
         "attributes": "{\"contact_uri\":\"<BOB NUMBER>\",\"products\":[\"ProgrammableSMS\"]}",
         "available": true, "date_created": "2016-06-29T15:27:24Z", "date_updated":
         "2016-06-29T15:27:24Z", "date_status_changed": "2016-06-29T15:27:24Z", "url":
@@ -319,69 +315,7 @@ http_interactions:
         "links": {"channels": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Workers/WK05f63e34660b14bd602848cdae7aec81/Channels",
         "activity": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities/WA3f4691c986746456ed5dd8db1c9783c9",
         "workspace": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc"}}'
-    http_version: 
   recorded_at: Wed, 29 Jun 2016 15:27:25 GMT
-- request:
-    method: get
-    uri: https://<TWILIO ACCOUNT SID>:<TWILIO AUTH TOKEN>@taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities?FriendlyName=Idle
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/json
-      Accept-Charset:
-      - utf-8
-      User-Agent:
-      - twilio-ruby/4.11.1 (ruby/x86_64-darwin15 2.2.1-p85)
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Access-Control-Allow-Credentials:
-      - 'true'
-      Access-Control-Allow-Headers:
-      - Accept, Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match,
-        If-Unmodified-Since
-      Access-Control-Allow-Methods:
-      - GET, POST, DELETE, OPTIONS
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Expose-Headers:
-      - ETag
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Wed, 29 Jun 2016 15:27:24 GMT
-      Strict-Transport-Security:
-      - max-age=15768000
-      Twilio-Request-Duration:
-      - '0.037'
-      Twilio-Request-Id:
-      - RQb849f7418ebf4f21870199b9e1f6305a
-      X-Powered-By:
-      - AT-5000
-      X-Shenanigans:
-      - none
-      Content-Length:
-      - '930'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"activities": [{"sid": "WA3f4691c986746456ed5dd8db1c9783c9", "account_sid":
-        "<TWILIO ACCOUNT SID>", "workspace_sid": "WS85b6a3a66f40c51c00b31bcbcadef5cc",
-        "friendly_name": "Idle", "available": true, "date_created": "2016-06-29T15:27:23Z",
-        "date_updated": "2016-06-29T15:27:23Z", "url": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities/WA3f4691c986746456ed5dd8db1c9783c9",
-        "links": {"workspace": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc"}}],
-        "meta": {"page": 0, "page_size": 50, "first_page_url": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities?FriendlyName=Idle&PageSize=50&Page=0",
-        "previous_page_url": null, "url": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities?FriendlyName=Idle&PageSize=50&Page=0",
-        "next_page_url": null, "key": "activities"}}'
-    http_version: 
-  recorded_at: Wed, 29 Jun 2016 15:27:26 GMT
 - request:
     method: post
     uri: https://<TWILIO ACCOUNT SID>:<TWILIO AUTH TOKEN>@taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Workers
@@ -437,19 +371,18 @@ http_interactions:
       encoding: UTF-8
       string: '{"sid": "WK6de15fa03a406dc004e308e363428e4e", "friendly_name": "Alice",
         "account_sid": "<TWILIO ACCOUNT SID>", "activity_sid": "WA3f4691c986746456ed5dd8db1c9783c9",
-        "activity_name": "Idle", "workspace_sid": "WS85b6a3a66f40c51c00b31bcbcadef5cc",
-        "attributes": "{\"contact_uri\":\"<ALICE NUMBER>\",\"products\":[\"ProgrammableVoice\"]}",
+        "activity_name": "Available", "workspace_sid": "WS85b6a3a66f40c51c00b31bcbcadef5cc",
+        "attributes": "{\"contact_uri\":\"<BOB NUMBER>\",\"products\":[\"ProgrammableVoice\"]}",
         "available": true, "date_created": "2016-06-29T15:27:25Z", "date_updated":
         "2016-06-29T15:27:25Z", "date_status_changed": "2016-06-29T15:27:25Z", "url":
         "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Workers/WK6de15fa03a406dc004e308e363428e4e",
         "links": {"channels": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Workers/WK6de15fa03a406dc004e308e363428e4e/Channels",
         "activity": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities/WA3f4691c986746456ed5dd8db1c9783c9",
         "workspace": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc"}}'
-    http_version: 
   recorded_at: Wed, 29 Jun 2016 15:27:26 GMT
 - request:
     method: get
-    uri: https://<TWILIO ACCOUNT SID>:<TWILIO AUTH TOKEN>@taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities?FriendlyName=Reserved
+    uri: https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities?FriendlyName=Reserved
     body:
       encoding: US-ASCII
       string: ''
@@ -506,11 +439,10 @@ http_interactions:
         "meta": {"page": 0, "page_size": 50, "first_page_url": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities?FriendlyName=Reserved&PageSize=50&Page=0",
         "previous_page_url": null, "url": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities?FriendlyName=Reserved&PageSize=50&Page=0",
         "next_page_url": null, "key": "activities"}}'
-    http_version: 
   recorded_at: Wed, 29 Jun 2016 15:27:27 GMT
 - request:
     method: get
-    uri: https://<TWILIO ACCOUNT SID>:<TWILIO AUTH TOKEN>@taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities?FriendlyName=Busy
+    uri: https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities?FriendlyName=Unavailable
     body:
       encoding: US-ASCII
       string: ''
@@ -561,17 +493,16 @@ http_interactions:
       encoding: UTF-8
       string: '{"activities": [{"sid": "WAb697a77d7c32451bf7c5ba13092520db", "account_sid":
         "<TWILIO ACCOUNT SID>", "workspace_sid": "WS85b6a3a66f40c51c00b31bcbcadef5cc",
-        "friendly_name": "Busy", "available": false, "date_created": "2016-06-29T15:27:23Z",
+        "friendly_name": "Unavailable", "available": false, "date_created": "2016-06-29T15:27:23Z",
         "date_updated": "2016-06-29T15:27:23Z", "url": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities/WAb697a77d7c32451bf7c5ba13092520db",
         "links": {"workspace": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc"}}],
-        "meta": {"page": 0, "page_size": 50, "first_page_url": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities?FriendlyName=Busy&PageSize=50&Page=0",
-        "previous_page_url": null, "url": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities?FriendlyName=Busy&PageSize=50&Page=0",
+        "meta": {"page": 0, "page_size": 50, "first_page_url": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities?FriendlyName=Unavailable&PageSize=50&Page=0",
+        "previous_page_url": null, "url": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities?FriendlyName=Unavailable&PageSize=50&Page=0",
         "next_page_url": null, "key": "activities"}}'
-    http_version: 
   recorded_at: Wed, 29 Jun 2016 15:27:27 GMT
 - request:
     method: post
-    uri: https://<TWILIO ACCOUNT SID>:<TWILIO AUTH TOKEN>@taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/TaskQueues
+    uri: https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/TaskQueues
     body:
       encoding: US-ASCII
       string: FriendlyName=Voice&ReservationActivitySid=WA25980f4fd950d089a4432c0f8f9020d0&AssignmentActivitySid=WAb697a77d7c32451bf7c5ba13092520db&TargetWorkers=products+HAS+%27ProgrammableVoice%27
@@ -627,146 +558,15 @@ http_interactions:
         "Voice", "target_workers": "products HAS ''ProgrammableVoice''", "max_reserved_workers":
         1, "reservation_activity_sid": "WA25980f4fd950d089a4432c0f8f9020d0", "reservation_activity_name":
         "Reserved", "assignment_activity_sid": "WAb697a77d7c32451bf7c5ba13092520db",
-        "assignment_activity_name": "Busy", "date_created": "2016-06-29T15:27:26Z",
+        "assignment_activity_name": "Unavailable", "date_created": "2016-06-29T15:27:26Z",
         "date_updated": "2016-06-29T15:27:26Z", "url": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/TaskQueues/WQd429f95c83b6f607ce85ba70c93b0632",
         "links": {"assignment_activity": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities/WAb697a77d7c32451bf7c5ba13092520db",
         "reservation_activity": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities/WA25980f4fd950d089a4432c0f8f9020d0",
         "workspace": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc"}}'
-    http_version: 
   recorded_at: Wed, 29 Jun 2016 15:27:28 GMT
 - request:
     method: post
-    uri: https://<TWILIO ACCOUNT SID>:<TWILIO AUTH TOKEN>@taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/TaskQueues
-    body:
-      encoding: US-ASCII
-      string: FriendlyName=SMS&ReservationActivitySid=WA25980f4fd950d089a4432c0f8f9020d0&AssignmentActivitySid=WAb697a77d7c32451bf7c5ba13092520db&TargetWorkers=products+HAS+%27ProgrammableSMS%27
-    headers:
-      Accept:
-      - application/json
-      Accept-Charset:
-      - utf-8
-      User-Agent:
-      - twilio-ruby/4.11.1 (ruby/x86_64-darwin15 2.2.1-p85)
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 201
-      message: CREATED
-    headers:
-      Access-Control-Allow-Credentials:
-      - 'true'
-      Access-Control-Allow-Headers:
-      - Accept, Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match,
-        If-Unmodified-Since
-      Access-Control-Allow-Methods:
-      - GET, POST, DELETE, OPTIONS
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Expose-Headers:
-      - ETag
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Wed, 29 Jun 2016 15:27:26 GMT
-      Strict-Transport-Security:
-      - max-age=15768000
-      Twilio-Request-Duration:
-      - '0.050'
-      Twilio-Request-Id:
-      - RQ6cfbfa1b9ea149dbb8c550a0c41c9109
-      X-Powered-By:
-      - AT-5000
-      X-Shenanigans:
-      - none
-      Content-Length:
-      - '1088'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"sid": "WQ930a6a2941710b65c432115e894077ea", "account_sid": "<TWILIO
-        ACCOUNT SID>", "workspace_sid": "WS85b6a3a66f40c51c00b31bcbcadef5cc", "friendly_name":
-        "SMS", "target_workers": "products HAS ''ProgrammableSMS''", "max_reserved_workers":
-        1, "reservation_activity_sid": "WA25980f4fd950d089a4432c0f8f9020d0", "reservation_activity_name":
-        "Reserved", "assignment_activity_sid": "WAb697a77d7c32451bf7c5ba13092520db",
-        "assignment_activity_name": "Busy", "date_created": "2016-06-29T15:27:26Z",
-        "date_updated": "2016-06-29T15:27:26Z", "url": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/TaskQueues/WQ930a6a2941710b65c432115e894077ea",
-        "links": {"assignment_activity": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities/WAb697a77d7c32451bf7c5ba13092520db",
-        "reservation_activity": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities/WA25980f4fd950d089a4432c0f8f9020d0",
-        "workspace": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc"}}'
-    http_version: 
-  recorded_at: Wed, 29 Jun 2016 15:27:28 GMT
-- request:
-    method: post
-    uri: https://<TWILIO ACCOUNT SID>:<TWILIO AUTH TOKEN>@taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/TaskQueues
-    body:
-      encoding: US-ASCII
-      string: FriendlyName=All&ReservationActivitySid=WA25980f4fd950d089a4432c0f8f9020d0&AssignmentActivitySid=WAb697a77d7c32451bf7c5ba13092520db&TargetWorkers=1%3D%3D1
-    headers:
-      Accept:
-      - application/json
-      Accept-Charset:
-      - utf-8
-      User-Agent:
-      - twilio-ruby/4.11.1 (ruby/x86_64-darwin15 2.2.1-p85)
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 201
-      message: CREATED
-    headers:
-      Access-Control-Allow-Credentials:
-      - 'true'
-      Access-Control-Allow-Headers:
-      - Accept, Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match,
-        If-Unmodified-Since
-      Access-Control-Allow-Methods:
-      - GET, POST, DELETE, OPTIONS
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Expose-Headers:
-      - ETag
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Wed, 29 Jun 2016 15:27:27 GMT
-      Strict-Transport-Security:
-      - max-age=15768000
-      Twilio-Request-Duration:
-      - '0.046'
-      Twilio-Request-Id:
-      - RQd4569d7de9ae40b7b82a78878a19ef73
-      X-Powered-By:
-      - AT-5000
-      X-Shenanigans:
-      - none
-      Content-Length:
-      - '1062'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"sid": "WQaca0638b54769dae7a67d5bf89135780", "account_sid": "<TWILIO
-        ACCOUNT SID>", "workspace_sid": "WS85b6a3a66f40c51c00b31bcbcadef5cc", "friendly_name":
-        "All", "target_workers": "1==1", "max_reserved_workers": 1, "reservation_activity_sid":
-        "WA25980f4fd950d089a4432c0f8f9020d0", "reservation_activity_name": "Reserved",
-        "assignment_activity_sid": "WAb697a77d7c32451bf7c5ba13092520db", "assignment_activity_name":
-        "Busy", "date_created": "2016-06-29T15:27:27Z", "date_updated": "2016-06-29T15:27:27Z",
-        "url": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/TaskQueues/WQaca0638b54769dae7a67d5bf89135780",
-        "links": {"assignment_activity": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities/WAb697a77d7c32451bf7c5ba13092520db",
-        "reservation_activity": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities/WA25980f4fd950d089a4432c0f8f9020d0",
-        "workspace": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc"}}'
-    http_version: 
-  recorded_at: Wed, 29 Jun 2016 15:27:28 GMT
-- request:
-    method: post
-    uri: https://<TWILIO ACCOUNT SID>:<TWILIO AUTH TOKEN>@taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Workflows
+    uri: https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Workflows
     body:
       encoding: US-ASCII
       string: Configuration=%7B%22task_routing%22%3A%7B%22filters%22%3A%5B%7B%22expression%22%3A%22selected_product%3D%3D%5C%22ProgrammableVoice%5C%22%22%2C%22targets%22%3A%5B%7B%22queue%22%3A%22WQd429f95c83b6f607ce85ba70c93b0632%22%2C%22priority%22%3A5%2C%22timeout%22%3A%2220%22%7D%2C%7B%22queue%22%3A%22WQaca0638b54769dae7a67d5bf89135780%22%2C%22priority%22%3A1%2C%22timeout%22%3A%2220%22%2C%22expression%22%3A%221%3D%3D1%22%7D%5D%7D%2C%7B%22expression%22%3A%22selected_product%3D%3D%5C%22ProgrammableSMS%5C%22%22%2C%22targets%22%3A%5B%7B%22queue%22%3A%22WQ930a6a2941710b65c432115e894077ea%22%2C%22priority%22%3A5%2C%22timeout%22%3A%2220%22%7D%2C%7B%22queue%22%3A%22WQaca0638b54769dae7a67d5bf89135780%22%2C%22priority%22%3A1%2C%22timeout%22%3A%2220%22%2C%22expression%22%3A%221%3D%3D1%22%7D%5D%7D%5D%2C%22default_filter%22%3A%7B%22queue%22%3A%22WQaca0638b54769dae7a67d5bf89135780%22%2C%22priority%22%3A1%2C%22timeout%22%3A%2220%22%2C%22expression%22%3A%221%3D%3D1%22%7D%7D%7D&FriendlyName=Sales&AssignmentCallbackUrl=https%3A%2F%2F0895379f.ngrok.io%2Fassignment&FallbackAssignmentCallbackUrl=https%3A%2F%2F0895379f.ngrok.io%2Fassignment&TaskReservationTimeout=15
@@ -825,72 +625,10 @@ http_interactions:
         "task_reservation_timeout": 15, "date_created": "2016-06-29T15:27:27Z", "date_updated":
         "2016-06-29T15:27:27Z", "url": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Workflows/WWd708ef67712c26ccd5857ae54d1e7d22",
         "links": {"workspace": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc"}}'
-    http_version: 
   recorded_at: Wed, 29 Jun 2016 15:27:29 GMT
 - request:
     method: get
-    uri: https://<TWILIO ACCOUNT SID>:<TWILIO AUTH TOKEN>@taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities?FriendlyName=Idle
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/json
-      Accept-Charset:
-      - utf-8
-      User-Agent:
-      - twilio-ruby/4.11.1 (ruby/x86_64-darwin15 2.2.1-p85)
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Access-Control-Allow-Credentials:
-      - 'true'
-      Access-Control-Allow-Headers:
-      - Accept, Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match,
-        If-Unmodified-Since
-      Access-Control-Allow-Methods:
-      - GET, POST, DELETE, OPTIONS
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Expose-Headers:
-      - ETag
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Wed, 29 Jun 2016 15:27:27 GMT
-      Strict-Transport-Security:
-      - max-age=15768000
-      Twilio-Request-Duration:
-      - '0.026'
-      Twilio-Request-Id:
-      - RQd7d6c081c10f42478072ff68da5533d0
-      X-Powered-By:
-      - AT-5000
-      X-Shenanigans:
-      - none
-      Content-Length:
-      - '930'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"activities": [{"sid": "WA3f4691c986746456ed5dd8db1c9783c9", "account_sid":
-        "<TWILIO ACCOUNT SID>", "workspace_sid": "WS85b6a3a66f40c51c00b31bcbcadef5cc",
-        "friendly_name": "Idle", "available": true, "date_created": "2016-06-29T15:27:23Z",
-        "date_updated": "2016-06-29T15:27:23Z", "url": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities/WA3f4691c986746456ed5dd8db1c9783c9",
-        "links": {"workspace": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc"}}],
-        "meta": {"page": 0, "page_size": 50, "first_page_url": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities?FriendlyName=Idle&PageSize=50&Page=0",
-        "previous_page_url": null, "url": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities?FriendlyName=Idle&PageSize=50&Page=0",
-        "next_page_url": null, "key": "activities"}}'
-    http_version: 
-  recorded_at: Wed, 29 Jun 2016 15:27:29 GMT
-- request:
-    method: get
-    uri: https://<TWILIO ACCOUNT SID>:<TWILIO AUTH TOKEN>@taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities?FriendlyName=Offline
+    uri: https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities?FriendlyName=Offline
     body:
       encoding: US-ASCII
       string: ''
@@ -947,7 +685,6 @@ http_interactions:
         "meta": {"page": 0, "page_size": 50, "first_page_url": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities?FriendlyName=Offline&PageSize=50&Page=0",
         "previous_page_url": null, "url": "https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities?FriendlyName=Offline&PageSize=50&Page=0",
         "next_page_url": null, "key": "activities"}}'
-    http_version: 
   recorded_at: Wed, 29 Jun 2016 15:27:29 GMT
 - request:
     method: post
@@ -1003,6 +740,66 @@ http_interactions:
       string: '{"code": 20404, "message": "The requested resource /Workspaces//TaskQueues
         was not found", "more_info": "https://www.twilio.com/docs/errors/20404", "status":
         404}'
-    http_version: 
   recorded_at: Thu, 15 Jun 2017 19:15:27 GMT
-recorded_with: VCR 3.0.0
+- request:
+    method: post
+    uri: https://taskrouter.twilio.com/v1/Workspaces/WS85b6a3a66f40c51c00b31bcbcadef5cc/Activities
+    body:
+      encoding: UTF-8
+      string: FriendlyName=Reserved
+    headers:
+      User-Agent:
+      - twilio-ruby/5.46.0 (ruby/x86_64-darwin19 3.0.0-p0)
+      Accept-Charset:
+      - utf-8
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept:
+      - application/json
+      Authorization:
+      - Basic QUM1NzhkMDc4ZDIxNGY1MTc4OTgxZjBhOGJlMzI4OTE4ZjozYTI4YzBiMTM1OWZiYmUzZDZkMjVmYmQ5YzBiNjJkNA==
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 201
+      message: CREATED
+    headers:
+      Date:
+      - Tue, 02 Feb 2021 00:02:07 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '196'
+      Connection:
+      - keep-alive
+      Twilio-Request-Id:
+      - RQ1890da98c98c4840ae339e92155fe858
+      Twilio-Request-Duration:
+      - '0.129'
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match,
+        If-Unmodified-Since
+      Access-Control-Allow-Methods:
+      - GET, POST, DELETE, OPTIONS
+      Access-Control-Expose-Headers:
+      - ETag
+      Access-Control-Allow-Credentials:
+      - 'true'
+      X-Powered-By:
+      - AT-5000
+      X-Shenanigans:
+      - none
+      X-Home-Region:
+      - us1
+      X-Api-Domain:
+      - taskrouter.twilio.com
+      Strict-Transport-Security:
+      - max-age=31536000
+    body:
+      encoding: UTF-8
+      string: '{"account_sid": "<TWILIO ACCOUNT SID>", "friendly_name": "Reserved",
+        "sid": "WAXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", "workspace_sid": "WS85b6a3a66f40c51c00b31bcbcadef5cc"}'
+  recorded_at: Tue, 02 Feb 2021 00:02:07 GMT

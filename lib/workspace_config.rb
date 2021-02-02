@@ -1,5 +1,5 @@
 class WorkspaceConfig
-  WORKSPACE_NAME          = 'Rails Workspace'.freeze
+  WORKSPACE_NAME          = 'RailsWorkspace'.freeze
   WORKFLOW_NAME           = 'Sales'.freeze
   WORKFLOW_TIMEOUT        = ENV['WORKFLOW_TIMEOUT'].freeze
   QUEUE_TIMEOUT           = ENV['QUEUE_TIMEOUT'].freeze
@@ -26,7 +26,7 @@ class WorkspaceConfig
     WorkspaceInfo.instance.workers = create_workers
     workflow_sid = create_workflow.sid
     WorkspaceInfo.instance.workflow_sid = workflow_sid
-    idle_activity_sid = activity_by_name('Idle').sid
+    idle_activity_sid = activity_by_name('Available').sid
     WorkspaceInfo.instance.post_work_activity_sid = idle_activity_sid
     WorkspaceInfo.instance.idle_activity_sid = idle_activity_sid
     WorkspaceInfo.instance.offline_activity_sid = activity_by_name('Offline').sid
@@ -43,7 +43,7 @@ class WorkspaceConfig
       auth_token
     )
 
-    client_instance.taskrouter.v1
+    client_instance.taskrouter
   end
 
   def create_workspace
@@ -75,7 +75,7 @@ class WorkspaceConfig
     client.workspaces(@workspace_sid).workers.create(
       friendly_name: name,
       attributes:    attributes,
-      activity_sid:  activity_by_name('Idle').sid
+      activity_sid:  activity_by_name('Available').sid
     )
   end
 
@@ -83,9 +83,13 @@ class WorkspaceConfig
     client.workspaces(@workspace_sid).activities.list(friendly_name: name).first
   end
 
+  def create_activity_by_name(name)
+    client.workspaces(@workspace_sid).activities.create(friendly_name: name)
+  end
+
   def create_task_queues
-    reservation_activity_sid = activity_by_name('Reserved').sid
-    assignment_activity_sid  = activity_by_name('Busy').sid
+    reservation_activity_sid = create_activity_by_name('Reserved').sid
+    assignment_activity_sid  = activity_by_name('Unavailable').sid
 
     voice_queue = create_task_queue('Voice', reservation_activity_sid,
                                     assignment_activity_sid,

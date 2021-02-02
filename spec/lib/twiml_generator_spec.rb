@@ -13,9 +13,9 @@ describe TwimlGenerator do
       xml_string = described_class.generate_gather_product(callback_url)
       document = Nokogiri::XML(xml_string)
 
-      gather_node = document.root.child
-      first_say_node = gather_node.children.first
-      last_say_node = gather_node.children.last
+      gather_node = document.xpath("//Gather").first
+      first_say_node = gather_node.xpath("//Say").first
+      last_say_node = gather_node.xpath("//Say").last
 
       expect(gather_node.name).to eq('Gather')
       expect(gather_node.attribute('numDigits').content)
@@ -42,8 +42,8 @@ describe TwimlGenerator do
       xml_string = described_class.generate_task_enqueue(selected_product)
       document   = Nokogiri::XML(xml_string)
 
-      enqueue_node = document.root.child
-      task_node    = enqueue_node.child
+      enqueue_node = document.xpath("//Enqueue").first
+      task_node    = enqueue_node.xpath("//Task").first
 
       expect(enqueue_node.name).to eq('Enqueue')
       expect(enqueue_node.attribute('workflowSid').content)
@@ -62,7 +62,7 @@ describe TwimlGenerator do
       xml_string = described_class.generate_confirm_message(status)
       document   = Nokogiri::XML(xml_string)
 
-      message_node = document.root.child
+      message_node = document.xpath("//Message").first
 
       expect(message_node.name).to eq('Message')
       expect(message_node.content)

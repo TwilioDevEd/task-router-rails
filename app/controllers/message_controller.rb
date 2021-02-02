@@ -1,5 +1,5 @@
 class MessageController < ApplicationController
-  skip_before_filter :verify_authenticity_token
+  skip_before_action :verify_authenticity_token
 
   def incoming
     command     = params['Body'].downcase
@@ -9,7 +9,7 @@ class MessageController < ApplicationController
       status = 'Offline'
       activity_sid = WorkspaceInfo.instance.offline_activity_sid
     else
-      status = 'Idle'
+      status = 'Available'
       activity_sid = WorkspaceInfo.instance.idle_activity_sid
     end
 
