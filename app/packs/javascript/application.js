@@ -7,7 +7,6 @@ import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import "bootstrap"
 import "../stylesheets/application"
-import './send-sms.js'
 
 Rails.start()
 Turbolinks.start()
