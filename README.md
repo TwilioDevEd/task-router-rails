@@ -12,7 +12,7 @@ on the product they select.
 
 ## Local Development
 
-This project is built using [Ruby on Rails](http://rubyonrails.org/) Framework.
+This project is built using [Ruby on Rails](http://rubyonrails.org/) Framework for the backend and [NodeJS](https://nodejs.org/en/) to serve the frontend assets.
 
 1. First clone this repository and `cd` into it.
 
@@ -21,10 +21,15 @@ This project is built using [Ruby on Rails](http://rubyonrails.org/) Framework.
    $ cd task-router-rails
    ```
 
-1. Install the dependencies. Be sure to have [SQLite](https://www.sqlite.org/download.html) installed on your system before running this command.
+1. Install the backend dependencies. Be sure to have [SQLite](https://www.sqlite.org/download.html) installed on your system before running this command.
 
    ```bash
    $ bundle install
+   ```
+
+1. Install the frontend dependencies.
+   ```bash
+   $ npm install
    ```
 
 1. Expose your application to the wider internet using [ngrok](http://ngrok.com).
