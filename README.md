@@ -4,7 +4,7 @@
  
 # Task Router - Rails
 
-![](https://github.com/TwilioDevEd/task-router-rails/workflows/build/badge.svg)
+![](https://github.com/TwilioDevEd/task-router-rails/actions/workflows/build.yml/badge.svg)
 
 Give your customers specialized product support. Learn how to use TaskRouter to
 create a workflow that will redirect users to an appropriate sales agent, based
