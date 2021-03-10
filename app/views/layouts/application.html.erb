@@ -1,40 +1,34 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Warm Transfer</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-  <%= stylesheet_link_tag "//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" %>
-  <%= stylesheet_link_tag "//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" %>
-</head>
-<body>
-    <div class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/">Task Router Twilio</a>
-            </div>
+  <head>
+    <title>Task Router</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_pack_tag 'stylesheets/application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'javascript/application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <div class="navbar-header"><a class="navbar-brand" href="/">Task Router Twilio</a></div>
+        <div>
+          <ul class="nav navbar-nav mr-auto">
+            <li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
+          </ul>
         </div>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="row pt-3">
+        <div class="col">
+          <%= yield %>
+        </div>
+      </div>
+      <hr>
+      <footer>Made with ❤️ by your pals
+        <a href="http://www.twilio.com">@twilio</a></footer>
     </div>
-    <div class="container body-content">
-        <%= yield %>
-        <hr />
-        <footer class="footer">
-            <div class="container">
-                <p class="text-muted">
-                    Made with <i class="fa fa-heart"></i> by your pals
-                    <a href="http://www.twilio.com">@twilio</a>
-                </p>
-            </div>
-        </footer>
-    </div>
-    <%= javascript_include_tag "//code.jquery.com/jquery-2.1.4.min.js" %>
-    <%= javascript_include_tag "//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-</body>
+  </body>
 </html>

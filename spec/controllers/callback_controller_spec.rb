@@ -42,10 +42,11 @@ RSpec.describe CallbackController, type: :controller do
           .to receive(:create)
           .with(from: ENV['TWILIO_NUMBER'], to: worker_number, body: message_body)
 
-        post :events,
-             EventType: 'worker.activity.update',
-             WorkerAttributes: worker_attributes,
-             WorkerActivityName: 'Offline'
+        post :events, params: {
+          EventType: 'worker.activity.update',
+          WorkerAttributes: worker_attributes,
+          WorkerActivityName: 'Offline'
+          }
       end
     end
 
@@ -59,9 +60,10 @@ RSpec.describe CallbackController, type: :controller do
       it 'saves missed calls in the database' do
         expect(MissedCall.count).to eq(0)
 
-        post :events,
-             EventType: 'task.canceled',
-             TaskAttributes: task_attributes
+        post :events, params: {
+          EventType: 'task.canceled',
+          TaskAttributes: task_attributes
+        }
 
         expect(MissedCall.count).to eq(1)
         expect(MissedCall.first.phone_number).to eq(from_number)
@@ -81,22 +83,23 @@ RSpec.describe CallbackController, type: :controller do
         expect(call_double).to receive(:update)
           .with(url: redirect_url)
 
-        post :events,
-             EventType: 'workflow.timeout',
-             TaskAttributes: task_attributes
+        post :events, params: {
+          EventType: 'workflow.timeout',
+          TaskAttributes: task_attributes
+        }
       end
     end
 
     context 'received event is not workflow.timeout or task.canceled' do
       it 'saves nothing in the database' do
-        expect { post :events, EventType: 'any.event' }
+        expect { post :events, params: { EventType: 'any.event' } }
           .to_not change { MissedCall.count }.from(0)
       end
 
       it 'doesn\'t redirect the call' do
         expect(client_double).to_not receive(:account)
 
-        post :events, EventType: 'any.event'
+        post :events, params: { EventType: 'any.event' }
       end
     end
   end

@@ -27,7 +27,7 @@ RSpec.describe CallController, type: :controller do
         .once
         .and_return(expected_response)
 
-      post :enqueue, Digits: 1
+      post :enqueue, params: { Digits: 1 }
 
       expect(response).to be_ok
       expect(response.body).to eq(expected_response)

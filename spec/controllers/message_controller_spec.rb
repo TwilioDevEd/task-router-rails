@@ -27,11 +27,11 @@ RSpec.describe MessageController, type: :controller do
         expected_response = '<Response></Response>'
 
         expect(TwimlGenerator).to receive(:generate_confirm_message)
-          .with('Idle')
+          .with('Available')
           .once
           .and_return(expected_response)
 
-        get :incoming, Body: 'On', From: worker_phone_number
+        get :incoming, params: { Body: 'On', From: worker_phone_number }
 
         expect(response).to be_ok
         expect(response.body).to eq(expected_response)
