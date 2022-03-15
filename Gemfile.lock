@@ -65,7 +65,7 @@ GEM
     autoprefixer-rails (10.2.0.0)
       execjs
     bindex (0.8.1)
-    bootsnap (1.5.1)
+    bootsnap (1.7.7)
       msgpack (~> 1.0)
     bootstrap (4.5.3)
       autoprefixer-rails (>= 9.1.0)
@@ -122,6 +122,8 @@ GEM
     nokogiri (1.11.2-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.11.2-x64-mingw32)
+      racc (~> 1.4)
+    nokogiri (1.11.2-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.11.2-x86_64-linux)
       racc (~> 1.4)
