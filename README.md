@@ -57,6 +57,7 @@ This project is built using [Ruby on Rails](http://rubyonrails.org/) Framework f
    ```
 
    [Learn how to configure a Twilio phone number for Programmable Voice](https://www.twilio.com/docs/voice/quickstart/ruby#configure-your-webhook-url)
+
    [Learn how to configure a Twilio phone number for Programmable SMS](https://support.twilio.com/hc/en-us/articles/223136047-Configure-a-Twilio-Phone-Number-to-Receive-and-Respond-to-Messages)
 
 1. Copy the sample configuration file and edit it to match your configuration.
